@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            function loadViewTimes() {
+                $.ajax({
+                    type: "GET",
+                    url: "http://localhost:4567/view/add",
+                    data: "fire boss",
+                    cache: false,
+                    success: function(data){
+                        $("#vcounter").text(data);
+                    }
+                });
+            }
+
+            var vt = loadViewTimes();
+            console.info(vt);
+            $("#vcounter").html(vt)
+/*            var v2 = $("#vcounter").innerHTML;
+            console.info("v2:"+v2);*/
+        });
+    </script>
+</head>
+<body>
+<div id='vcounter'></div>
+</body>
+</html>
+

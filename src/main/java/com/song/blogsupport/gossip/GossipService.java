@@ -53,7 +53,13 @@ public class GossipService {
             e.printStackTrace();
         }
 //        GitUtil.commitByPwd(GIT_REPO,gossipVo.getType());
-        GitUtil.commitBySSHKey(GIT_REPO, gossipVo.getType());
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                GitUtil.commitBySSHKey(GIT_REPO, gossipVo.getType());
+            }
+        }).start();
+
     }
 
 

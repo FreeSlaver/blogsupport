@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.song.blogsupport.baiduindex.dao.BaiduIndexDao" >
+  <resultMap id="BaseResultMap" type="com.song.blogsupport.baiduindex.BaiduIndexVo" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="domain_name" property="domainName" jdbcType="VARCHAR" />
+    <result column="verify_code" property="verifyCode" jdbcType="VARCHAR" />
+    <result column="verify_status" property="verifyStatus" jdbcType="BIT" />
+    <result column="resolve_addr" property="resolveAddr" jdbcType="VARCHAR" />
+    <result column="github_pages_url" property="githubPagesUrl" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, domain_name, verify_code, verify_status, resolve_addr, github_pages_url, create_time, 
+    update_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_baidu_index
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_baidu_index
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.song.blogsupport.baiduindex.BaiduIndexVo" >
+    insert into t_baidu_index (id, domain_name, verify_code, 
+      verify_status, resolve_addr, github_pages_url, 
+      create_time, update_time)
+    values (#{id,jdbcType=INTEGER}, #{domainName,jdbcType=VARCHAR}, #{verifyCode,jdbcType=VARCHAR}, 
+      #{verifyStatus,jdbcType=BIT}, #{resolveAddr,jdbcType=VARCHAR}, #{githubPagesUrl,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.song.blogsupport.baiduindex.BaiduIndexVo" >
+    insert into t_baidu_index
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="domainName != null" >
+        domain_name,
+      </if>
+      <if test="verifyCode != null" >
+        verify_code,
+      </if>
+      <if test="verifyStatus != null" >
+        verify_status,
+      </if>
+      <if test="resolveAddr != null" >
+        resolve_addr,
+      </if>
+      <if test="githubPagesUrl != null" >
+        github_pages_url,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="domainName != null" >
+        #{domainName,jdbcType=VARCHAR},
+      </if>
+      <if test="verifyCode != null" >
+        #{verifyCode,jdbcType=VARCHAR},
+      </if>
+      <if test="verifyStatus != null" >
+        #{verifyStatus,jdbcType=BIT},
+      </if>
+      <if test="resolveAddr != null" >
+        #{resolveAddr,jdbcType=VARCHAR},
+      </if>
+      <if test="githubPagesUrl != null" >
+        #{githubPagesUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.song.blogsupport.baiduindex.BaiduIndexVo" >
+    update t_baidu_index
+    <set >
+      <if test="domainName != null" >
+        domain_name = #{domainName,jdbcType=VARCHAR},
+      </if>
+      <if test="verifyCode != null" >
+        verify_code = #{verifyCode,jdbcType=VARCHAR},
+      </if>
+      <if test="verifyStatus != null" >
+        verify_status = #{verifyStatus,jdbcType=BIT},
+      </if>
+      <if test="resolveAddr != null" >
+        resolve_addr = #{resolveAddr,jdbcType=VARCHAR},
+      </if>
+      <if test="githubPagesUrl != null" >
+        github_pages_url = #{githubPagesUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.song.blogsupport.baiduindex.BaiduIndexVo" >
+    update t_baidu_index
+    set domain_name = #{domainName,jdbcType=VARCHAR},
+      verify_code = #{verifyCode,jdbcType=VARCHAR},
+      verify_status = #{verifyStatus,jdbcType=BIT},
+      resolve_addr = #{resolveAddr,jdbcType=VARCHAR},
+      github_pages_url = #{githubPagesUrl,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+
+  <select id="selectByDomain" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select
+    <include refid="Base_Column_List" />
+    from t_baidu_index
+    where domain_name = #{domainName,jdbcType=VARCHAR}
+  </select>
+</mapper>

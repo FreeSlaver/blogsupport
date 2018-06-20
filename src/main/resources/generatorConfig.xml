@@ -14,24 +14,24 @@
 			userId="root" password="Sx0618@$&amp;" />
 
 		<javaModelGenerator targetPackage="com.song.blogsupport.comment"
-			targetProject="F:\opensource\blogsupport\src\main\java">
+			targetProject="F:\blogsupport\src\main\java">
 			<property name="enableSubPackages" value="true" />
 			<property name="trimStrings" value="true" />
 		</javaModelGenerator>
 
 		 <sqlMapGenerator targetPackage="com.song.blogsupport.comment."
-			targetProject="F:\opensource\blogsupport\src\main\java">
+			targetProject="F:\blogsupport\src\main\java">
 			<property name="enableSubPackages" value="true" />
 		</sqlMapGenerator>
  
 		<javaClientGenerator targetPackage="com.song.blogsupport.comment"
-			targetProject="F:\opensource\blogsupport\src\main\java"
+			targetProject="F:\blogsupport\src\main\java"
 			type="XMLMAPPER">
 			<property name="enableSubPackages" value="true" />
 		</javaClientGenerator> 
 
 
-		<table tableName="t_comment" domainObjectName="CommentVo"
+		<table tableName="t_baidu_index" domainObjectName="BaiduIndexVo"
 			enableCountByExample="false" enableUpdateByExample="false"
 			enableDeleteByExample="false" enableSelectByExample="false"
 			selectByExampleQueryId="false">

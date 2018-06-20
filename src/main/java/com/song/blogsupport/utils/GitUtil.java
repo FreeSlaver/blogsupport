@@ -23,7 +23,20 @@ import java.util.Date;
 public class GitUtil {
     private static Git git = null;
 
-    public static void commitBySSHKey(String gitRepositoryPath, String comment){
+    public static Git clone(String gitRepoUrl, File directory) {
+        Git git = null;
+        try {
+            git = Git.cloneRepository()
+                    .setURI(gitRepoUrl)
+                    .setDirectory(directory)
+                    .call();
+        } catch (GitAPIException e) {
+            log.error(e.getMessage(), e);
+        }
+        return git;
+    }
+
+    public static void commitBySSHKey(String gitRepositoryPath, String comment) {
         SshSessionFactory factory = new JschConfigSessionFactory() {
             @Override
             protected void configure(OpenSshConfig.Host hc, Session session) {
@@ -32,7 +45,7 @@ public class GitUtil {
         TransportConfigCallback transportConfigCallback = new TransportConfigCallback() {
             @Override
             public void configure(Transport transport) {
-                SshTransport sshTransport = (SshTransport)transport;
+                SshTransport sshTransport = (SshTransport) transport;
                 sshTransport.setSshSessionFactory(factory);
             }
         };

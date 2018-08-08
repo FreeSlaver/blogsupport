@@ -8,7 +8,9 @@ import com.song.blogsupport.comment.CommentVo;
 import com.song.blogsupport.gossip.GossipService;
 import com.song.blogsupport.gossip.GossipVo;
 import com.song.blogsupport.server.MyExceptionHandler;
+import com.song.blogsupport.server.RequestLogFilter;
 import com.song.blogsupport.server.Resp;
+import com.song.blogsupport.server.ResponseLogFilter;
 import com.song.blogsupport.utils.HTTPUtil;
 import com.song.blogsupport.utils.NginxUtil;
 import lombok.extern.slf4j.Slf4j;
@@ -17,11 +19,10 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.time.DateUtils;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+import spark.ModelAndView;
+import spark.template.thymeleaf.ThymeleafTemplateEngine;
 
-import java.util.Arrays;
-import java.util.Date;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 import static spark.Spark.*;
 
@@ -45,9 +46,16 @@ public class Server {
         after((request, response) -> {
             log.info(response.body());
         });*/
+        staticFiles.location("/public");
         //comment
+        before(context.getBean(RequestLogFilter.class));
+        after(context.getBean(ResponseLogFilter.class));
         exception(Exception.class, context.getBean(MyExceptionHandler.class));
 
+        get("/ping", (request, response) -> {
+            return "pong";
+        });
+        get("/baiduindex.html", (rq, rs) -> new ModelAndView(new HashMap(), "baiduindex"), new ThymeleafTemplateEngine());
         //view times
         get("/view/get", (request, response) -> {
             Set<String> params = request.queryParams();
@@ -160,14 +168,15 @@ public class Server {
             if (!isValidDomain) {
                 throw new Exception("非法的域名");
             }
-
             String email = request.queryParams("email");
+            log.info("/index/add email:{}", email);
             //生成一个nginx.conf文件
             NginxUtil.genConf(domainName, gitPagesUrl);
             //nginx reload service nginx reload
             NginxUtil.reload();
-            response.header("Access-Control-Allow-Origin", "*");
             return new Resp<>().toString();
         });
+
+
     }
 }

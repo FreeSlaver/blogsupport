@@ -1,0 +1,30 @@
+.container {
+    margin: auto;
+    width: 85%;
+    margin-top: 8%;
+
+}
+
+h2 {
+    text-align: center
+}
+
+label {
+    display: inline-block;
+    width: 12em;
+    text-align: right;
+    text-align: -webkit-right
+}
+
+.form-group {
+    margin: 1em 0;
+}
+.form-group input{
+    height: 1.6em;
+    padding: 0 0.4em;
+}
+form button{
+    position: absolute;
+    left: 32em;
+    width: 6em;
+}

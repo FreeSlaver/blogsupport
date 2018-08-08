@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="/css/app.css">
+</head>
+<body>
+<div class="container">
+
+    <!-- 文章内容 -->
+    <div class="content">
+        <h2>Github Pages百度索引收录工具</h2>
+        <div>
+            <div class="step">
+                <h3 id="第一步-添加dns解析">第一步 添加DNS解析</h3>
+                <p>去DNSPOD添加一条A记录，线路类型为百度的，将记录值设置为198.74.48.82。<br/>
+                    <img src="https://3gods.com/public/img/life/2018-06-20-Github-Pages-Baidu-Index-Tool-1.png"
+                         class="post-img"
+                         alt="Github-Pages-Baidu-Index-DNS"/></p>
+                <hr/>
+            </div>
+
+            <div class="step">
+                <h3 id="第二步-填写github-pages-url和域名">第二步 填写Github Pages Url和域名</h3>
+                <!--<form  action="http://data.3gods.com/index/add" method="get">-->
+                    <form action="http://localhost:4567/index/add" method="get">
+                    <div class="form-group">
+                        <label for="gitPagesUrl">Github Pages地址:</label>
+                        <input type="url" name="gitPagesUrl" class="form-control" id="gitPagesUrl" placeholder=""/>
+                    </div>
+                    <div class="form-group">
+                        <label for="domainName">要绑定的域名:</label>
+                        <input type="text" name="domainName" class="form-control" id="domainName" placeholder=""/>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">你的邮箱:</label>
+                        <input type="email" name="email" class="form-control" id="email" placeholder=""/>
+                    </div>
+                    <button type="submit" class="btn btn-default">提交</button>
+                </form>
+                <p><br/></p>
+                <hr/>
+            </div>
+
+            <div class="step">
+                <h3 id="第三步-去百度站长管理后台验证域名所有权">第三步 去百度站长管理后台验证域名所有权</h3>
+                <p><img src="https://3gods.com/public/img/life/2018-06-20-Github-Pages-Baidu-Index-Tool-2.png"
+                        class="post-img"
+                        alt="Github-Pages-Baidu-Index-Add-Domain"/></p>
+                <hr/>
+            </div>
+
+            <div class="step">
+                <h3 id="第四步-使用百度抓取诊断进行爬取校验">第四步 使用百度抓取诊断进行爬取校验</h3>
+                <p><img src="https://3gods.com/public/img/life/2018-06-20-Github-Pages-Baidu-Index-Tool-3.png"
+                        class="post-img"
+                        alt="Github-Pages-Baidu-Index-Verify"/></p>
+
+                <p>如图显示，网站可被百度爬虫访问并成功抓取，后续百度就会进行收录工作，新站可能比较慢，但是可以手动提交sitemap.xml。</p>
+                <hr/>
+            </div>
+            <h3 id="小结">小结</h3>
+            <p>目前很多功能都没考虑，支持的是最简单的情况，如果有人使用，或者有问题，可以在下方留言。</p>
+
+        </div>
+        <hr>
+    </div>
+
+    <!-- 文章评论 -->
+    <div class="comment">
+        <div id="container"></div>
+        <link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+        <script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
+        <script>
+            var gitment = new Gitment({
+                id: '/baiduindex.html', // 可选。默认为 location.href
+                owner: 'songxin1990',
+                repo: 'songxin1990.github.io',
+                perPage: 10,
+                oauth: {
+                    client_id: 'f2299daf48f59439fc7e',
+                    client_secret: 'a510e7758a872c5554e06ad92cacb7e8b5936315',
+                },
+            })
+            gitment.render('container')
+        </script>
+    </div>
+</div>
+</body>
+</html>

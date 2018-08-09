@@ -18,11 +18,13 @@ public class QZoneTest {
 
     public static void main(String[] args) throws IOException {
         File file = new File("qzone.txt");
-        String url = "https://user.qzone.qq.com/proxy/domain/taotao.qq.com/cgi-bin/emotion_cgi_msglist_v6?uin=504252262&ftype=0&sort=0&replynum=100&callback=_preloadCallback&code_version=1&format=jsonp&need_private_comment=1&qzonetoken=37668506047b380a02f7c1b03857a4d3a0890084713830a7b8f822cc2eb7ae34c0b77527a9ffc704ef&g_tk=852835650&num=40";
+        String url = "https://user.qzone.qq.com/proxy/domain/taotao.qq.com/cgi-bin/emotion_cgi_msglist_v6?uin=504252262&ftype=0&sort=0&replynum=100&callback=_preloadCallback&code_version=1&format=jsonp&need_private_comment=1&" +
+                "qzonetoken=815f60de009e8a66c49c3099aaee75523ae4c2f32e39f6578a56b09d286b119b57f1a5c4f88ba0e6&g_tk=852835650&num=40";
 
         while (total > 0) {
             String posStr = "&pos=" + pos;
             String url2 = url + posStr;
+            //要设置cookie
             String str = HTTPUtil.get(url2);
             proc(str, file);
 

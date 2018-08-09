@@ -25,8 +25,12 @@ import java.util.Map;
 @Slf4j
 public class HTTPUtil {
     public static String get(String url) throws IOException {
+        return get(url,null);
+    }
+    public static String get(String url,String cookie) throws IOException {
         CloseableHttpClient httpclient = HttpClients.createDefault();
         HttpGet get = new HttpGet(url);
+        get.addHeader("Cookie",cookie);
         HttpEntity respEntity = null;
         try {
             log.info("HttpUtil GET REQUEST,url:{}", url);

@@ -17,8 +17,10 @@ public class CommandUtil {
             BufferedReader br = new BufferedReader(
                     new InputStreamReader(p.getInputStream(), "UTF8"));
             String s = null;
-            while ((s = br.readLine()) != null)
+            while ((s = br.readLine()) != null) {
                 log.info("line: {}", s);
+                System.out.println(s);
+            }
 
             int wait = p.waitFor();
             int exit = p.exitValue();
@@ -37,7 +39,16 @@ public class CommandUtil {
 //      execute("cmd");
         //先要在本地测试，然后再centos上测试
 //        execute("service nginx start");
-        boolean result = execute("ping data.3gods.com");
+        System.out.println("fuck");
+
+//        boolean result = execute("/bin/bash -c youtube-dl --proxy socks5://localhost:1080/ -F s34fl3eFYMc");
+//        boolean result = execute("/usr/local/bin/youtube-dl --proxy socks5://localhost:1080/ -F s34fl3eFYMc");
+//        String com = "youtube-dl --proxy socks5://localhost:1080/ -F s34fl3eFYMc";
+//        result = execute(com);
+//        Process p = Runtime.getRuntime().exec("/bin/bash -c **YouTerminalSoftWareName**");
+        String com = "/usr/local/bin/youtube-dl --proxy socks5://localhost:1080/  -o '/var/www/html/%(title)s.%(ext)s' -f best/mp4 s34fl3eFYMc";
+//        CommandUtil.execute(com);
+        Boolean result = execute(com);
         System.out.println(result);
     }
 }

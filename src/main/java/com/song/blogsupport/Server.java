@@ -13,6 +13,7 @@ import com.song.blogsupport.server.Resp;
 import com.song.blogsupport.server.ResponseLogFilter;
 import com.song.blogsupport.utils.HTTPUtil;
 import com.song.blogsupport.utils.NginxUtil;
+import com.song.blogsupport.youtube.YoutubeDownloadService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -39,6 +40,7 @@ public class Server {
         CommentService commentService = context.getBean(CommentService.class);
         GossipService gossipService = context.getBean(GossipService.class);
         BaiduIndexService baiduIndexService = context.getBean(BaiduIndexService.class);
+        YoutubeDownloadService youtubeService = context.getBean(YoutubeDownloadService.class);
         /*before((request, response) -> {
             request.queryMap();
            log.info(request.queryParams()+request.body());
@@ -177,6 +179,14 @@ public class Server {
             return new Resp<>().toString();
         });
 
+        get("/youtube/down",(request,response) -> {
+//            request.body().;
+            String url = request.params("youtubeUrl");
+            System.out.println(url);
+            response.redirect("https://baidu.com");
+            Resp resp = new Resp();
+            return resp.toString();
+        });
 
     }
 }

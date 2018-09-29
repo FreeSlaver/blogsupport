@@ -10,14 +10,19 @@
 	</appender>
 
 	<appender name="rootlog" class="org.apache.log4j.DailyRollingFileAppender">
-		<param name="File" value="/data/logs/blogsupport/root.log" />
+		<param name="File" value="root.log" />
 		<param name="DatePattern" value="'.'yyyy-MM-dd'.log'" />
 		<param name="Append" value="true" />
 		<layout class="org.apache.log4j.PatternLayout">
 			<param name="ConversionPattern" value="%-d{yyyy-MM-dd HH\:mm\:ss SSS} [%c]-[%p] %m%n" />
 		</layout>
 	</appender>
-	
+
+
+	<category name="com.song.blogsupport">
+		<priority value="DEBUG" />
+		<appender-ref ref="rootlog" />
+	</category>
 
 	<category name="org.springframework.jdbc.core.JdbcTemplate">
 		<priority value="DEBUG" />
